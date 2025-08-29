@@ -1,0 +1,33 @@
+services:
+  product-service:
+    build:
+      context: .
+      args:
+        SERVICE: "product-service"
+    ports:
+      - "5001:5001"
+    environment:
+      - SERVICE=product-service
+
+  order-service:
+    build:
+      context: .
+      args:
+        SERVICE: "order-service"
+    ports:
+      - "5002:5002"
+    environment:
+      - SERVICE=order-service
+
+  gateway:
+    build:
+      context: .
+      args:
+        SERVICE: "gateway"
+    ports:
+      - "8080:8080"
+    environment:
+      - SERVICE=gateway
+    depends_on:
+      - product-service
+      - order-service

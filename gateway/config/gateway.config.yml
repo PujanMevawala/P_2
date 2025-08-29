@@ -10,10 +10,10 @@ apiEndpoints:
     paths: "/orders*"
 
 serviceEndpoints:
-  products-service:
-    url: "http://localhost:5001"
-  orders-service:
-    url: "http://localhost:5002"
+  product-service:
+    url: "http://product-service:5001"
+  order-service:
+    url: "http://order-service:5002"
 
 policies:
   - proxy
@@ -25,11 +25,11 @@ pipelines:
     policies:
       - proxy:
           - action:
-              serviceEndpoint: products-service
+              serviceEndpoint: product-service
   orders-pipeline:
     apiEndpoints:
       - orders-api
     policies:
       - proxy:
           - action:
-              serviceEndpoint: orders-service
+              serviceEndpoint: order-service
